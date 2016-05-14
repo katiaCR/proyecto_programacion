@@ -5,6 +5,9 @@
  */
 package proyecto_3;
 
+import Datos.DataBase;
+import Interfaz.MenuPrincipal;
+
 /**
  *
  * @author katia abigail
@@ -15,7 +18,23 @@ public class Proyecto_3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        /*String bd = "centro";
+        String user = "user";
+        String password = "1234";
+        DataBase db = new DataBase(bd, user, password);
+        
+        if(db.abrirConexion()) {
+            System.out.println("NOS HEMOS CONECTADO!!!!!");
+            MenuPrincipal v1= new MenuPrincipal(db);            
+        }
+        else{
+            System.out.println("No se ha podido conectar");
+        }*/
+        
+        MenuPrincipal v1= new MenuPrincipal();
+        
+        
     }
     
 }
