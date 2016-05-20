@@ -75,7 +75,6 @@ public class MenuPrincipal extends JFrame implements ActionListener, WindowListe
         //if(db.abrirConexion()) {
             switch (e.getActionCommand()) {
                 case "0":
-                    //VentanaAlta
                     //VentanaAlta v1 = new VentanaAlta(db);
                     break;
                 case "1":

@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import oracle.jdbc.OracleDriver;
 
 /**
  *
@@ -22,10 +23,10 @@ import java.util.logging.Logger;
  */
 public class DataBase {
     
-    String servidor="jdbc:mysql://localhost/";
-    String bd;
-    String password;
-    String user;
+    String servidor= "jdbc:oracle:thin:@172.30.160.190:";
+    String bd= "1521:xe";
+    String password= "case";
+    String user= "damlocal";
     Connection conexion=null;
     
     public DataBase(String bd, String user, String password) {
@@ -43,12 +44,11 @@ public class DataBase {
         
         try {
             //Cargamos el driver
-            Class.forName("com.mysql.jdbc.Driver");
-            
+            //Class.forName("com.mysql.jdbc.Driver");
+            DriverManager.registerDriver(new OracleDriver());
             //Crear conexion a la BDD
             conexion = DriverManager.getConnection(servidor + bd, user, password);
             estado = true;
-        } catch (ClassNotFoundException ex) { System.out.println("Class Not Found Exception: ");
         } catch (SQLException ex) { System.out.println("SQL Exception: " +ex.getLocalizedMessage());
         } catch (Exception ex) { System.out.println("Exception General: " +ex.getLocalizedMessage());
         }
