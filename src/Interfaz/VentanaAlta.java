@@ -29,4 +29,5 @@ public class VentanaAlta extends Ventana{
     }
     
     
+    
 }

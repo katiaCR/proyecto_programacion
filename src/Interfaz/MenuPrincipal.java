@@ -64,6 +64,10 @@ public class MenuPrincipal extends JFrame implements ActionListener, WindowListe
            botones[x].setText(textoBotones[x]);
            botones[x].setActionCommand(Integer.toString(x));
            botones[x].addActionListener(this);
+           
+           //AGREGAR UNA IMAGEN EN UN BOTON
+           //http://javacursoavanzado.blogspot.com.es/2012/10/poner-imagen-boton-java.html
+           //botones[x].set
            contenedor.add(botones[x]);
        }
         //Atiendo a la ventana

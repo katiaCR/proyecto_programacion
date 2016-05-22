@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
 /*
 TODAS LAS VENTANAS A CREAR SERAN EXTENDS DE VENTANA
 */
@@ -27,7 +26,7 @@ public abstract class Ventana extends JFrame implements ActionListener {
     public Ventana() {
         contenedor = (JPanel) this.getContentPane();
         this.setTitle("Juego Numeros vs Colores");
-        this.setLocation(300, 500);
+        this.setLocation(500, 500);
         this.setVisible(true);
         contenedor.setLayout(new BorderLayout());
         initComponents();
