@@ -3,6 +3,7 @@
  */
 package Interfaz;
 ;
+import Datos.DataBase;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -21,11 +22,12 @@ public abstract class Ventana extends JFrame implements ActionListener {
 
     protected JPanel contenedor, cuerpo, botonesMenu;
     protected JButton botonFin, botonAux;
-    protected JLabel titulo;
+    DataBase bd;
 
-    public Ventana() {
+    public Ventana(DataBase bd) {
+        this.bd=bd;
         contenedor = (JPanel) this.getContentPane();
-        this.setTitle("Juego Numeros vs Colores");
+        setTitle();
         this.setLocation(500, 500);
         this.setVisible(true);
         contenedor.setLayout(new BorderLayout());
@@ -37,9 +39,6 @@ public abstract class Ventana extends JFrame implements ActionListener {
     {
         cuerpo = new JPanel();
         botonesMenu = new JPanel();
-        //Pongo el Título de la página
-        titulo=new JLabel("ALMACEN");
-        contenedor.add(titulo, BorderLayout.NORTH);
         creaCuerpo();
         creaBotones();
     }
@@ -50,9 +49,10 @@ public abstract class Ventana extends JFrame implements ActionListener {
         botonesMenu.setLayout(new GridLayout(1,2,5,5));
         //Creará los botones dejando el botón auxiliar sin texto 
         //para que lo defina la clase que lo herede.
-        botonFin=new JButton("Fin");
-        botonFin.setActionCommand("Fin");
+        botonFin=new JButton("Confirmar");
+        botonFin.setActionCommand("Confirmar");
         botonFin.addActionListener(this);
+        
         botonAux=new JButton("");
         //pongo el texto en el botón aux que lo tendrá que hacer
         //la ventana que lo herede
@@ -69,8 +69,11 @@ public abstract class Ventana extends JFrame implements ActionListener {
     //Estos dos métodos son obligatorios para todas las ventanas
     //Que hereden esta ventana
     
+    //agrega un titulo a la ventana
+    public abstract void setTitle();
+            
     //cierra la ventana
-    public abstract void fin();
+    public abstract void confirmar();
     
     //pone el texto en el boton Aux
     public abstract void textoBotonAux();
@@ -90,12 +93,12 @@ public abstract class Ventana extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         switch (ae.getActionCommand()) {
-            case "Fin":
-                System.out.println("Fin");
-                fin();
+            case "Confirmar":
+                System.out.println("Confirmar");
+                confirmar();
                 break;
             case "Aux":
-                System.out.println("Aux");
+                //System.out.println("Aux");
                 aux();
                 break;
         }

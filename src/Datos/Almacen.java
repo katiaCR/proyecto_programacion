@@ -14,9 +14,16 @@ public class Almacen {
     private String razonSocial;
     private String sedeSocial;
     private String telf;
-    private String codPostal;
+    private int codPostal;
 
-    public Almacen(String id, String razonSocial, String sedeSocial, String telf, String codPostal) {
+    public Almacen(String razonSocial, String sedeSocial, String telf, int codPostal) {
+        this.razonSocial = razonSocial;
+        this.sedeSocial = sedeSocial;
+        this.telf = telf;
+        this.codPostal = codPostal;
+    }
+    
+    public Almacen(String id, String razonSocial, String sedeSocial, String telf, int codPostal) {
         this.id = id;
         this.razonSocial = razonSocial;
         this.sedeSocial = sedeSocial;
@@ -24,6 +31,15 @@ public class Almacen {
         this.codPostal = codPostal;
     }
 
+    public void muestraDatos(){
+        System.out.println("id: " +  id + 
+                " razon_social: " + razonSocial +
+                " sede_social: " + sedeSocial +
+                " teléfono_contacto: " + telf +
+                " código_postal: " + codPostal);    
+    }
+    
+    
     /**
      * @return the id
      */
@@ -55,7 +71,7 @@ public class Almacen {
     /**
      * @return the codPostal
      */
-    public String getCodPostal() {
+    public int getCodPostal() {
         return codPostal;
     }
     

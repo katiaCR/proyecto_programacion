@@ -29,11 +29,11 @@ public class DataBase {
     String user= "damlocal";
     Connection conexion=null;
     
-    public DataBase(String bd, String user, String password) {
+    /*public DataBase(String bd, String user, String password) {
         this.bd = bd;
         this.user = user;
         this.password = password;
-    }
+    }*/
     
     public boolean buscaRegistro(String nombreBuscar){
         return false;
@@ -56,26 +56,28 @@ public class DataBase {
         return estado;
     }
     
-     private boolean compruebaID(String cadena){
+    private boolean compruebaID(String cadena){
         return cadena.length()>0 && cadena.length() <=4;
     }
      
      public void alta(Almacen al){
-        /*if(abrirConexion()){
-            if(compruebaID(al.getNombre())){
-                //lo guardo en la Base de datos
-                String cadena="INSERT INTO alumnos( Nombre, Nota1, Nota2, Nota3) VALUES ('" + al.getNombre()
-                            + "',  '" + al.getNota(0) + "', '" + al.getNota(1) + " ', ' " + al.getNota(2) + "')";
-
-                ejecutaUpdate(cadena);
-
-            }else{
-                cerrarConexion();
-                System.out.println("el nombre tiene que tener entre 1 y 30 caracterres");                               
-            }
-        }*/
-        
-        
+        PreparedStatement st;
+        //sustituimos las variables por un ?
+        String sentencia = "INSERT INTO alumnos(, Nota1, Nota2, Nota3) VALUES (?,?,?,?)";
+        //int notas[]=al.getNotas();
+        System.out.println(sentencia);
+        try{
+            st= conexion.prepareStatement(sentencia);
+            /*st.setString(1,al.getNombre());
+            st.setInt(2,notas[0]);
+            st.setInt(3,notas[1]);
+            st.setInt(4,notas[2]);*/
+            System.out.println("Alta: " + st.toString());
+            st.executeUpdate();
+            st.close();        
+        } catch (SQLException ex) {
+            System.out.println("Error con la base de datos: " + ex.getMessage());
+        }
     }
      
      public void baja(Almacen al){         
@@ -164,7 +166,7 @@ public class DataBase {
             
             try {
                 while(rs.next()){
-                    listado.add(new Almacen(rs.getString(1),rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7)));                    
+                    listado.add(new Almacen(rs.getString(1),rs.getString(3), rs.getString(5), rs.getString(6), rs.getInt(7)));                    
                 }
                 
             } catch (SQLException ex) {
