@@ -63,15 +63,18 @@ public class DataBase {
      public void alta(Almacen al){
         PreparedStatement st;
         //sustituimos las variables por un ?
-        String sentencia = "INSERT INTO alumnos(, Nota1, Nota2, Nota3) VALUES (?,?,?,?)";
+        
+        //CAMBIAR ELCODIGO POSTAL PARA QUE SEA STRING
+        String sentencia = "INSERT INTO almacen(id_almacen, razon_social , sede_social, telefono_contacto, codigo_postal) VALUES (id_alm_sec.NEXTVAL,?,?,?,?)";
         //int notas[]=al.getNotas();
+        String datos[]=al.getDatos();
         System.out.println(sentencia);
         try{
             st= conexion.prepareStatement(sentencia);
-            /*st.setString(1,al.getNombre());
-            st.setInt(2,notas[0]);
-            st.setInt(3,notas[1]);
-            st.setInt(4,notas[2]);*/
+            st.setString(2,datos[0]);
+            st.setString(3,datos[1]);
+            st.setString(4,datos[2]);
+            st.setString(5,datos[3]);
             System.out.println("Alta: " + st.toString());
             st.executeUpdate();
             st.close();        
@@ -79,29 +82,26 @@ public class DataBase {
             System.out.println("Error con la base de datos: " + ex.getMessage());
         }
     }
-     
+    
      public void baja(Almacen al){         
-        if(abrirConexion()){
-            if(compruebaID(al.getId())){
-                ResultSet rs;
-                PreparedStatement st;
-                String sentencia="DELETE FROM `alumnos` WHERE `alumnos`.`id` = ?";
-                try{
-                    st= conexion.prepareStatement(sentencia);
-                    st.setString(1,al.getId());
-                    rs=st.executeQuery();
-                    if(rs.isBeforeFirst()){
-                        recorreResultado(rs);
-                    }else{
-                    }
-                } catch (SQLException ex) {
-                    System.out.println("Error con la base de datos: " + ex.getMessage());
-                }
-            }else{
-                cerrarConexion();
-                System.out.println("el telefono tiene que tener entre 1 y 30 caracterres");
-            }
+        int n=0;
+        PreparedStatement st;
+        //sustituimos las variables por un ?
+        String sentencia = "DELETE FROM almacen WHERE id_almacen = ?";
+         
+         try{
+            st= conexion.prepareStatement(sentencia);
+            st.setString(1,al.getNombre());
+            System.out.println("Baja: " + st.toString());
+            //en la n estara la sentencia que deseas ejecutar
+            n = st.executeUpdate();
+            st.close();        
+        } catch (SQLException ex) {
+            System.out.println("Error con la base de datos: " + ex.getMessage());
         }
+         finally {
+             return n;
+         }
     }
      
     public void cerrarConexion() {
@@ -166,7 +166,7 @@ public class DataBase {
             
             try {
                 while(rs.next()){
-                    listado.add(new Almacen(rs.getString(1),rs.getString(3), rs.getString(5), rs.getString(6), rs.getInt(7)));                    
+                    listado.add(new Almacen(rs.getString(1),rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7)));                    
                 }
                 
             } catch (SQLException ex) {

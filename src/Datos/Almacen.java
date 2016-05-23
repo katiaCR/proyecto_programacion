@@ -5,6 +5,8 @@
  */
 package Datos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author katia abigail
@@ -14,16 +16,16 @@ public class Almacen {
     private String razonSocial;
     private String sedeSocial;
     private String telf;
-    private int codPostal;
+    private String codPostal;
 
-    public Almacen(String razonSocial, String sedeSocial, String telf, int codPostal) {
+    public Almacen(String razonSocial, String sedeSocial, String telf, String codPostal) {
         this.razonSocial = razonSocial;
         this.sedeSocial = sedeSocial;
         this.telf = telf;
         this.codPostal = codPostal;
     }
     
-    public Almacen(String id, String razonSocial, String sedeSocial, String telf, int codPostal) {
+    public Almacen(String id, String razonSocial, String sedeSocial, String telf, String codPostal) {
         this.id = id;
         this.razonSocial = razonSocial;
         this.sedeSocial = sedeSocial;
@@ -37,6 +39,16 @@ public class Almacen {
                 " sede_social: " + sedeSocial +
                 " teléfono_contacto: " + telf +
                 " código_postal: " + codPostal);    
+    }
+    
+    public String[] getDatos(){
+        String[] datos=new String[4];
+        datos[0]=getRazonSocial();
+        datos[1]=getSedeSocial();
+        datos[2]=getTelf();
+        datos[3]=getCodPostal();
+        
+        return datos;
     }
     
     
@@ -71,7 +83,7 @@ public class Almacen {
     /**
      * @return the codPostal
      */
-    public int getCodPostal() {
+    public String getCodPostal() {
         return codPostal;
     }
     

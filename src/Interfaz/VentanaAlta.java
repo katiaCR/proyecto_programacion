@@ -38,10 +38,10 @@ public class VentanaAlta extends Ventana{
             if(tienenValor()){
                 if(camposText[2].getText().length()<10 && camposText[3].getText().length()<10){
                     if (telfValido() && codPosValido()) {
-                        newAlmacen = new Almacen(camposText[0].getText(),camposText[1].getText(),camposText[2].getText(),Integer.parseInt(camposText[3].getText()));
+                        newAlmacen = new Almacen(camposText[0].getText(),camposText[1].getText(),camposText[2].getText(),camposText[3].getText());
                         System.out.println("NUEVOS DATOS:");
                         newAlmacen.muestraDatos();
-                        bd.alta(newAlmacen);
+                        //bd.alta(newAlmacen);
                         System.out.println("dado de alta BORRAR!!");
                     }
                 }else{
@@ -50,8 +50,7 @@ public class VentanaAlta extends Ventana{
             }
         }catch(NumberFormatException e){
             ventanaError("No se ha podido dar de alta datos incorrectos");
-        }
-                
+        }                
     }
 
     @Override
