@@ -32,37 +32,53 @@ public class VentanaBaja extends Ventana{
 
     @Override
     public void confirmar() {
-        if(id.getText().length()>0){
-                if(db.baja(new Almacen(id.getText()))>0){
-                    System.out.println("Almacen dado de baja con exito");
-                    this.dispose();
+        try{
+            if(id.getText().length()>0){
+                if(idValido()){
+                    if(db.baja(new Almacen(id.getText()))>0){
+                        System.out.println("Almacen dado de baja con exito");
+                        this.dispose();
+                    }
                 }
-        } else{
-            ventanaError("tienes que introducir un nombre");
+            }else{
+                ventanaError("tienes que introducir un id");
+            }
+        }catch(NumberFormatException e){
+            ventanaError("valor del id inválido");
         }
-    }    
+    }
+    
     @Override
     public void textoBotonAux() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        botonAux.setText("Cancelar");
     }
 
     @Override
     public void aux() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.dispose();
     }
 
     @Override
     public void creaCuerpo() {   
         
-        cuerpo.setLayout(new GridLayout(2,1,5,5));     
-        //EL ID debe ser borrardo y en alta poner insert into (sec.nexvalue)
-        String nombreEtiquetas [] = {"razón social", "sede social", "telefono contacto", "codigo postal"};               
+        cuerpo.setLayout(new GridLayout(1,2,5,5));     
+        //EL ID debe ser borrardo y en alta poner insert into (sec.nexvalue)               
         etiquetaID = new JLabel("id: ");        
-        id =new JTextField();
-        
+        id =new JTextField();        
             cuerpo.add(etiquetaID);
             cuerpo.add(id);            
         contenedor.add(cuerpo);    
     }
+    private boolean idValido(){
+        try{
+            Integer.parseInt(id.getText());
+            return true;
+        }catch(NumberFormatException e){
+            throw e;
+        }
+    }
     
+     void limpiaVentana(){
+        id.setText(null);
+    }
 }

@@ -83,12 +83,13 @@ public class MenuPrincipal extends JFrame implements ActionListener, WindowListe
                     VentanaAlta v1 = new VentanaAlta(db);
                     break;
                 case "1":
-                    //VentanaBaja vb1= new VentanaBaja(db);
+                    VentanaBaja vb1= new VentanaBaja(db);
                     break;
                 case "2":
                     //VentanaListado vl1= new VentanaListado(db.ejecutaConsulta("SELECT * from almacenes"));
                     break;
                 case "3":
+                    //VISUALIZA TABLAS
                     break;
                 default:
                     fin();

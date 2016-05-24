@@ -43,7 +43,7 @@ public class VentanaAlta extends Ventana{
                         System.out.println("NUEVOS DATOS:");
                         newAlmacen.muestraDatos();
                         db.alta(newAlmacen);
-                        System.out.println("dado de alta BORRAR!!");
+                        limpiaVentana();
                     }
                 }else{
                     ventanaError("El máximo de caracteres es 10 en teléfono y código_postal");
@@ -110,9 +110,10 @@ public class VentanaAlta extends Ventana{
             throw e;
         }
     }
-    /*
-    public static boolean isNumeric(String cadena) {
-        return (cadena.matches("[+-]?\\d*(\\.\\d+)?") && cadena.equals("")==false);
-    }*/
-
+    
+    void limpiaVentana(){
+        for(int x=0; x<camposText.length;x++){
+            camposText[x].setText(null);
+        }
+    }
 }
