@@ -34,7 +34,8 @@ public class MenuPrincipal extends JFrame implements ActionListener, WindowListe
     DataBase db;
     BufferedImage myImage;
     
-    public MenuPrincipal(/*DataBase db*/) {
+    public MenuPrincipal(DataBase db) {
+        this.db=db;
         try {            
              myImage = ImageIO.read(new File("imagenes/fondo1.jpg"));
         } catch (IOException ex) {
@@ -76,7 +77,7 @@ public class MenuPrincipal extends JFrame implements ActionListener, WindowListe
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //if(db.abrirConexion()) {
+        if(db.abrirConexion()) {
             switch (e.getActionCommand()) {
                 case "0":
                     VentanaAlta v1 = new VentanaAlta(db);
@@ -95,8 +96,7 @@ public class MenuPrincipal extends JFrame implements ActionListener, WindowListe
                 
             }
         
-        //}
-        
+        }        
     }
 
     private void fin() {

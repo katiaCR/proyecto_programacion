@@ -22,9 +22,10 @@ public class VentanaAlta extends Ventana{
     Almacen newAlmacen;
     JLabel etiquetas [];
     JTextField camposText [];
+    DataBase db;
 
-    public VentanaAlta(DataBase bd) {
-        super(bd);
+    public VentanaAlta(DataBase db) {
+        this.db=db;
     }
     
     @Override
@@ -37,11 +38,11 @@ public class VentanaAlta extends Ventana{
         try{            
             if(tienenValor()){
                 if(camposText[2].getText().length()<10 && camposText[3].getText().length()<10){
-                    if (telfValido() && codPosValido()) {
-                        newAlmacen = new Almacen(camposText[0].getText(),camposText[1].getText(),camposText[2].getText(),camposText[3].getText());
+                    if (telfValido() && codPosValido() ) {
+                        newAlmacen = new Almacen(camposText[0].getText(),camposText[1].getText(),camposText[2].getText(),Integer.parseInt(camposText[3].getText()));
                         System.out.println("NUEVOS DATOS:");
                         newAlmacen.muestraDatos();
-                        //bd.alta(newAlmacen);
+                        db.alta(newAlmacen);
                         System.out.println("dado de alta BORRAR!!");
                     }
                 }else{

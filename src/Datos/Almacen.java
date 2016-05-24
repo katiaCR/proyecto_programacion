@@ -16,16 +16,16 @@ public class Almacen {
     private String razonSocial;
     private String sedeSocial;
     private String telf;
-    private String codPostal;
+    private int codPostal;
 
-    public Almacen(String razonSocial, String sedeSocial, String telf, String codPostal) {
+    public Almacen(String razonSocial, String sedeSocial, String telf, int codPostal) {
         this.razonSocial = razonSocial;
         this.sedeSocial = sedeSocial;
         this.telf = telf;
         this.codPostal = codPostal;
     }
     
-    public Almacen(String id, String razonSocial, String sedeSocial, String telf, String codPostal) {
+    public Almacen(String id, String razonSocial, String sedeSocial, String telf, int codPostal) {
         this.id = id;
         this.razonSocial = razonSocial;
         this.sedeSocial = sedeSocial;
@@ -33,6 +33,10 @@ public class Almacen {
         this.codPostal = codPostal;
     }
 
+    public Almacen(String id){
+        this.id=id;
+    }
+    
     public void muestraDatos(){
         System.out.println("id: " +  id + 
                 " razon_social: " + razonSocial +
@@ -42,12 +46,10 @@ public class Almacen {
     }
     
     public String[] getDatos(){
-        String[] datos=new String[4];
+        String[] datos=new String[3];
         datos[0]=getRazonSocial();
         datos[1]=getSedeSocial();
-        datos[2]=getTelf();
-        datos[3]=getCodPostal();
-        
+        datos[2]=getTelf();        
         return datos;
     }
     
@@ -83,7 +85,7 @@ public class Almacen {
     /**
      * @return the codPostal
      */
-    public String getCodPostal() {
+    public int getCodPostal() {
         return codPostal;
     }
     

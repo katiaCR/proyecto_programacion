@@ -21,11 +21,9 @@ TODAS LAS VENTANAS A CREAR SERAN EXTENDS DE VENTANA
 public abstract class Ventana extends JFrame implements ActionListener {
 
     protected JPanel contenedor, cuerpo, botonesMenu;
-    protected JButton botonFin, botonAux;
-    DataBase bd;
+    protected JButton botonFin, botonAux;    
 
-    public Ventana(DataBase bd) {
-        this.bd=bd;
+    public Ventana() {
         contenedor = (JPanel) this.getContentPane();
         setTitle();
         this.setLocation(500, 500);

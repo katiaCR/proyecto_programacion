@@ -18,22 +18,21 @@ public class Proyecto_3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /*
-        String bd = "centro";
-        String user = "user";
-        String password = "1234";
+        
+        String bd= "1521:xe";
+        String user= "central";      
+        String password= "central";
+        
         DataBase db = new DataBase(bd, user, password);
         
         if(db.abrirConexion()) {
             System.out.println("NOS HEMOS CONECTADO!!!!!");
-            //MenuPrincipal v1= new MenuPrincipal(db);            
+            MenuPrincipal v1= new MenuPrincipal(db);       
         }
         else{
             System.out.println("No se ha podido conectar");
-        }*/
-        
-        MenuPrincipal v1= new MenuPrincipal();
-                
+        }
+        //MenuPrincipal v1= new MenuPrincipal();
     }
     
 }

@@ -5,7 +5,11 @@
  */
 package Interfaz;
 
+import Datos.Almacen;
 import Datos.DataBase;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -13,11 +17,12 @@ import Datos.DataBase;
  */
 public class VentanaBaja extends Ventana{
 
-    JLabel id;
+    JLabel etiquetaID;
     JTextField id;
+    DataBase db;
     
-    public VentanaBaja(DataBase bd) {
-        super(bd);
+    public VentanaBaja(DataBase db) {
+        this.db=db;
     }
 
     @Override
@@ -27,9 +32,15 @@ public class VentanaBaja extends Ventana{
 
     @Override
     public void confirmar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+        if(id.getText().length()>0){
+                if(db.baja(new Almacen(id.getText()))>0){
+                    System.out.println("Almacen dado de baja con exito");
+                    this.dispose();
+                }
+        } else{
+            ventanaError("tienes que introducir un nombre");
+        }
+    }    
     @Override
     public void textoBotonAux() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -46,18 +57,12 @@ public class VentanaBaja extends Ventana{
         cuerpo.setLayout(new GridLayout(2,1,5,5));     
         //EL ID debe ser borrardo y en alta poner insert into (sec.nexvalue)
         String nombreEtiquetas [] = {"razón social", "sede social", "telefono contacto", "codigo postal"};               
-        etiquetas = new JLabel [nombreEtiquetas.length];        
-        camposText =new JTextField[nombreEtiquetas.length];
+        etiquetaID = new JLabel("id: ");        
+        id =new JTextField();
         
-        for (int x=0;x<nombreEtiquetas.length;x++) {
-            camposText[x] = new JTextField();
-            camposText[x].setName(nombreEtiquetas[x]);
-            etiquetas[x]=new JLabel(nombreEtiquetas[x]);
-            cuerpo.add(etiquetas[x]);
-            cuerpo.add(camposText[x]);            
-       }                
-        contenedor.add(cuerpo);
-    
+            cuerpo.add(etiquetaID);
+            cuerpo.add(id);            
+        contenedor.add(cuerpo);    
     }
     
 }

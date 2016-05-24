@@ -23,17 +23,17 @@ import oracle.jdbc.OracleDriver;
  */
 public class DataBase {
     
-    String servidor= "jdbc:oracle:thin:@172.30.160.190:";
-    String bd= "1521:xe";
-    String password= "case";
-    String user= "damlocal";
+    String servidor= "jdbc:oracle:thin:@localhost:";
+    String bd;/*= "1521:xe";*/
+    String password;/*= "case";*/
+    String user;/*= "central";*/
     Connection conexion=null;
     
-    /*public DataBase(String bd, String user, String password) {
+    public DataBase(String bd, String user, String password) {
         this.bd = bd;
         this.user = user;
         this.password = password;
-    }*/
+    }
     
     public boolean buscaRegistro(String nombreBuscar){
         return false;
@@ -62,36 +62,35 @@ public class DataBase {
      
      public void alta(Almacen al){
         PreparedStatement st;
-        //sustituimos las variables por un ?
+        //sustituimos las variables por un ?        
+        String sentencia = 
+        "INSERT INTO almacenes (id_almacen, razon_social , sede_social, telefono_contacto, codigo_postal) VALUES (id_alm_sec.NEXTVAL,?,?,?,?)";
         
-        //CAMBIAR ELCODIGO POSTAL PARA QUE SEA STRING
-        String sentencia = "INSERT INTO almacen(id_almacen, razon_social , sede_social, telefono_contacto, codigo_postal) VALUES (id_alm_sec.NEXTVAL,?,?,?,?)";
-        //int notas[]=al.getNotas();
         String datos[]=al.getDatos();
         System.out.println(sentencia);
         try{
             st= conexion.prepareStatement(sentencia);
-            st.setString(2,datos[0]);
-            st.setString(3,datos[1]);
-            st.setString(4,datos[2]);
-            st.setString(5,datos[3]);
+            st.setString(1,datos[0]);
+            st.setString(2,datos[1]);
+            st.setString(3,datos[2]);
+            st.setInt(4,al.getCodPostal());
             System.out.println("Alta: " + st.toString());
             st.executeUpdate();
             st.close();        
+            
         } catch (SQLException ex) {
             System.out.println("Error con la base de datos: " + ex.getMessage());
         }
     }
     
-     public void baja(Almacen al){         
+     public int baja(Almacen al){      
         int n=0;
         PreparedStatement st;
-        //sustituimos las variables por un ?
-        String sentencia = "DELETE FROM almacen WHERE id_almacen = ?";
+        String sentencia = "DELETE FROM almacenes WHERE id_almacen = ?";
          
          try{
             st= conexion.prepareStatement(sentencia);
-            st.setString(1,al.getNombre());
+            st.setString(1,al.getId());
             System.out.println("Baja: " + st.toString());
             //en la n estara la sentencia que deseas ejecutar
             n = st.executeUpdate();
@@ -166,7 +165,7 @@ public class DataBase {
             
             try {
                 while(rs.next()){
-                    listado.add(new Almacen(rs.getString(1),rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7)));                    
+                    listado.add(new Almacen(rs.getString(1),rs.getString(3), rs.getString(5), rs.getString(6), rs.getInt(7)));                    
                 }
                 
             } catch (SQLException ex) {
